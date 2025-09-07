@@ -28,6 +28,21 @@ Graduates leave with a coherent portfolio: annotated netlists, verified waveform
 
 - #### 0-Path To Zetta Scale Computing
 
+<img width="1447" height="813" alt="image" src="https://github.com/user-attachments/assets/b226f7f9-6b2c-41df-91f2-a895b32da365" />
+
+
+<img width="1448" height="811" alt="image" src="https://github.com/user-attachments/assets/18249d1c-24e3-4428-955b-2953345e12fc" />
+
+
+<img width="1449" height="808" alt="image" src="https://github.com/user-attachments/assets/cb822405-bea9-425d-81f7-52a4a269cdc2" />
+
+
+<img width="1450" height="812" alt="image" src="https://github.com/user-attachments/assets/9b70f99a-5041-4204-8b30-b95662ebcbfa" />
+
+
+<img width="1451" height="810" alt="image" src="https://github.com/user-attachments/assets/057b6cde-114a-41b1-ba71-b17f5e24d169" />
+
+
 
 - #### 1-CMOS Evolution And Next-Gen Candidates
 
