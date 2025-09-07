@@ -47,26 +47,115 @@ Graduates leave with a coherent portfolio: annotated netlists, verified waveform
 - #### 1-CMOS Evolution And Next-Gen Candidates
 
 
+<img width="1451" height="812" alt="image" src="https://github.com/user-attachments/assets/cbaca5b1-4cf9-40f6-93a2-2f75c0f07a4d" />
+
+
+
 - #### 2-Introduction To FinFETs
 
 
+<img width="1452" height="813" alt="image" src="https://github.com/user-attachments/assets/8fbde027-a528-473e-98c4-287c2715388f" />
+
+
+<img width="1451" height="813" alt="image" src="https://github.com/user-attachments/assets/aa1efd1c-78a4-4368-906c-23e4e372788c" />
+
+
+<img width="1448" height="811" alt="image" src="https://github.com/user-attachments/assets/91e0a730-fbf5-4721-ab4c-96a01ca538d1" />
+
+
 - #### 3-CMOS Technology Inflection Points
+
+<img width="1452" height="807" alt="image" src="https://github.com/user-attachments/assets/60cc2cd2-ddd8-4b19-849c-6f6265e2ba81" />
+
+
+<img width="1448" height="808" alt="image" src="https://github.com/user-attachments/assets/b32d6203-0d72-4673-886b-ff7caa96a59e" />
+
 
 
 - #### 4-Standard Cell Area Scaling And Variability
 
 
+<img width="1451" height="807" alt="image" src="https://github.com/user-attachments/assets/5dcebf22-0c39-4201-8e3c-2f4f0a412ee4" />
+
+
+<img width="1447" height="804" alt="image" src="https://github.com/user-attachments/assets/4996e2bd-aa42-4a61-92e1-259edad082ca" />
+
+
+<img width="1450" height="799" alt="image" src="https://github.com/user-attachments/assets/11b40553-a24e-468f-9207-43096b94febe" />
+
+
 - #### 5-Parasitics Resistance And Capacitance
+
+<img width="1451" height="804" alt="image" src="https://github.com/user-attachments/assets/defe1527-4027-40c0-a17e-09af2c17f864" />
+
+
+<img width="1451" height="804" alt="image" src="https://github.com/user-attachments/assets/e027474d-12db-4dbe-9b56-2613a1308fe9" />
+
+
+<img width="1450" height="804" alt="image" src="https://github.com/user-attachments/assets/c5a4f5f4-5ca1-4373-8ad6-66090d44741b" />
 
 
 - #### 6-Device Scaling And Electrical Characteristics
 
 
+<img width="1450" height="804" alt="image" src="https://github.com/user-attachments/assets/7607448b-1399-49b5-a7e2-23796beb22e5" />
+
+
+<img width="1448" height="803" alt="image" src="https://github.com/user-attachments/assets/9df2fbaa-5650-4fc0-9c80-4c8c4fc6c0aa" />
+
+
+<img width="1452" height="804" alt="image" src="https://github.com/user-attachments/assets/a52b074b-42d7-4375-90dd-5eb10e737b70" />
+
+
+<img width="1449" height="807" alt="image" src="https://github.com/user-attachments/assets/07de2558-d0be-40fd-8b37-849744fa3501" />
+
+
+<img width="1451" height="803" alt="image" src="https://github.com/user-attachments/assets/fca1127c-5bce-4dfa-90a0-0c87ebafe051" />
+
+
+<img width="1452" height="801" alt="image" src="https://github.com/user-attachments/assets/75ba0243-b720-4130-b4ef-6d173991ae49" />
+
+
+<img width="1448" height="805" alt="image" src="https://github.com/user-attachments/assets/f7290e57-4a01-4dc3-968b-e6f71213d4aa" />
+
+
 - #### 7-3D-Structures
+
+
+<img width="1450" height="804" alt="image" src="https://github.com/user-attachments/assets/7a5bdb5c-60b9-4ad8-a7c0-2399274fe17f" />
+
+
+<img width="1450" height="804" alt="image" src="https://github.com/user-attachments/assets/cdffeca0-bf10-4bff-8160-0bb1ed8b06a1" />
+
+
+<img width="1450" height="802" alt="image" src="https://github.com/user-attachments/assets/7821b108-0f6e-4a36-8616-d491eab36a18" />
+
+
+<img width="1450" height="804" alt="image" src="https://github.com/user-attachments/assets/027d8dfc-07b3-4fb1-aa73-99694812cc75" />
+
+
+<img width="1449" height="809" alt="image" src="https://github.com/user-attachments/assets/db667d29-1956-4563-b6fe-283e287bf6fe" />
+
+
+<img width="1447" height="805" alt="image" src="https://github.com/user-attachments/assets/521bdaac-c552-4b58-b2e0-e23a92194ee6" />
 
 
 - #### 8-BOEL Innovations
 
+
+<img width="1450" height="801" alt="image" src="https://github.com/user-attachments/assets/a1e74bae-ee21-4c12-a318-58ce212cdd9c" />
+
+
+<img width="1451" height="803" alt="image" src="https://github.com/user-attachments/assets/0145b8a5-eccc-4f2d-9b20-8ec308c0e949" />
+
+
+<img width="1455" height="807" alt="image" src="https://github.com/user-attachments/assets/2999c726-e3cc-4831-a1bd-031ad33806c5" />
+
+
+<img width="1449" height="806" alt="image" src="https://github.com/user-attachments/assets/5752f7fd-7ac2-4817-a0af-19e06d2d729d" />
+
+
+<img width="1450" height="803" alt="image" src="https://github.com/user-attachments/assets/db766ccc-8621-4363-8fee-1c4a732f76be" />
 
 
 </details>
