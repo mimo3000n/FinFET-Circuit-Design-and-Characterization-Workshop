@@ -21,3 +21,100 @@ The program then extends to a precision bandgap reference at 7 nm, guided by ins
 Graduates leave with a coherent portfolio: annotated netlists, verified waveforms, tables, and engineering narratives that demonstrate readiness for advanced-node roles. We include templates, checklists, and scripts to accelerate future projects, plus guidance on documenting methods for submission or engineering reviews. Whether you are targeting graduate research, analog or ASIC design, or high-impact internships, this workshop equips you with practical 7 nm experience and evidence of competence that travels globally.
 
 ------------------------------------------------------------------------------
+
+### Scaling Beyond CMOS: FinFET Devices and Innovations
+<details>
+<summary>Scaling Beyond CMOS: FinFET Devices and Innovations</summary>
+
+- #### 0-Path To Zetta Scale Computing
+
+
+- #### 1-CMOS Evolution And Next-Gen Candidates
+
+
+- #### 2-Introduction To FinFETs
+
+
+- #### 3-CMOS Technology Inflection Points
+
+
+- #### 4-Standard Cell Area Scaling And Variability
+
+
+- #### 5-Parasitics Resistance And Capacitance
+
+
+- #### 6-Device Scaling And Electrical Characteristics
+
+
+- #### 7-3D-Structures
+
+
+- #### 8-BOEL Innovations
+
+
+
+</details>
+
+---------------------------------------------------------------------------------
+### Lab-to-Simulation: 7nm FinFET Inverter Performance Analysis
+<details>
+<summary>Lab-to-Simulation: 7nm FinFET Inverter Performance Analysis</summary>
+
+- ### 9-First NFET Characteristics Using 7nm PDKs
+
+
+- ### 10-First Inverter Characteristics Using 7nm FinFETs
+
+
+- ### 11-Inverter Spice Deck And Characteristics Modelling
+
+
+- ### 12-W/L Ratio, Vt, Power Consumption. Prop Delay, Gain And Noise Margin
+
+
+- ### 13-Transconductance, Frequency And Inverter Characteristics Table Assignment
+
+
+- ### 14-Lab Tips To Calculate Switching Threshold, Drain Current And Power
+
+
+- ### 15-Lab Tips To Calculate Prop Delay, Transconductance and Frequency
+
+
+- ### 16-Assignment
+
+
+</details>
+
+---------------------------------------------------------------------------------------
+### Designing Bandgap References Using 7nm FinFETs
+<details>
+<summary>Designing Bandgap References Using 7nm FinFETs</summary>
+
+- #### 17-Introduction To Bandgap
+
+
+- #### 18-Bandgap Component Placement Using Xschem
+
+
+- #### 19-Bandgap Circuit Wiring Using Xschem
+
+
+- #### 20-Bandgap Circuit Final Simulations
+
+
+- #### 21-Assignment
+
+
+
+</details>
+
+-------------------------------------------------------------------------------------
+### Acknowledgments
+
+- #### Kunal Ghosh, Director, VSD Corp. Pvt. Ltd.
+- #### Soundarya Madhuri Royyuru, Teaching Assistant
+
+
+ 
