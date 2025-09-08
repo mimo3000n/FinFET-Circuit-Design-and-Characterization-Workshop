@@ -184,8 +184,9 @@ vsduser@vsduser:~/Desktop/asap_7nm_Xschem$
 
 <img width="1029" height="136" alt="image" src="https://github.com/user-attachments/assets/6d2ea202-aa4e-4633-8d21-c19e5ff3d525" />
 
+&nbsp;
 
-spice files we are using: 
+> spice files we are using: **nfet_char.spice**
 
 ``` spice
 ** sch_path: /home/hprcse/Finfet/nfet_char.sch
@@ -286,8 +287,19 @@ pre_osdi /home/vsduser/Desktop/asap_7nm_Xschem/bsimcmg.osdi
 
 **** end user architecture code
 .end
-
 ```
+&nbsp;
+> to create characteristics plot run
+> 
+> ___ngspice nfet_char.spice___
+>
+
+&nbsp;
+<img width="1359" height="947" alt="image" src="https://github.com/user-attachments/assets/7f6926b3-f729-46c5-aac7-d8f3b5fb20ab" />
+&nbsp;
+
+
+
 
 
 - ### 10-First Inverter Characteristics Using 7nm FinFETs
