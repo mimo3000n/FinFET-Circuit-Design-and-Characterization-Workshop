@@ -295,10 +295,15 @@ pre_osdi /home/vsduser/Desktop/asap_7nm_Xschem/bsimcmg.osdi
 >
 
 &nbsp;
-<img width="1359" height="947" alt="image" src="https://github.com/user-attachments/assets/7f6926b3-f729-46c5-aac7-d8f3b5fb20ab" />
-&nbsp;
-
-
+> <img width="1359" height="947" alt="image" src="https://github.com/user-attachments/assets/7f6926b3-f729-46c5-aac7-d8f3b5fb20ab" />
+> &nbsp;
+> 
+> if we ___plot id vs vd___ in **ngspice** we get following graph
+> 
+> &nbsp;
+> &nbsp;
+> <img width="1157" height="966" alt="image" src="https://github.com/user-attachments/assets/3852790a-6228-4850-bde2-44fc64aafc28" />
+> &nbsp;
 
 
 
