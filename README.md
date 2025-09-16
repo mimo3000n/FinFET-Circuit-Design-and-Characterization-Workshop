@@ -309,6 +309,18 @@ pre_osdi /home/vsduser/Desktop/asap_7nm_Xschem/bsimcmg.osdi
 
 - ### 10-First Inverter Characteristics Using 7nm FinFETs
 
+before we start with inverter characteristic we run xschem with nfet characteristic: **xschem nfet_char.sch**
+
+&nbsp;
+
+<img width="671" height="136" alt="image" src="https://github.com/user-attachments/assets/c298584b-1317-4b16-a475-73c5cada7466" />
+
+&nbsp;
+
+<img width="1192" height="896" alt="image" src="https://github.com/user-attachments/assets/4dfc71e9-96e9-41be-b447-581c777d5244" />
+
+&nbsp;
+&nbsp;
 
 - ### 11-Inverter Spice Deck And Characteristics Modelling
 
