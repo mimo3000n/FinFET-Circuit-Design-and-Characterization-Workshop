@@ -295,22 +295,22 @@ pre_osdi /home/vsduser/Desktop/asap_7nm_Xschem/bsimcmg.osdi
 &nbsp;
 #### to create characteristics plot run "___ngspice nfet_char.spice___"
 &nbsp;
-> <img width="1359" height="947" alt="image" src="https://github.com/user-attachments/assets/7f6926b3-f729-46c5-aac7-d8f3b5fb20ab" />
-> &nbsp;
-> 
-> if we ___plot id vs vd___ in **ngspice** we get following graph
-> 
-> &nbsp;
-> &nbsp;
-> <img width="1157" height="966" alt="image" src="https://github.com/user-attachments/assets/3852790a-6228-4850-bde2-44fc64aafc28" />
-> &nbsp;
+<img width="1359" height="947" alt="image" src="https://github.com/user-attachments/assets/7f6926b3-f729-46c5-aac7-d8f3b5fb20ab" />
+&nbsp;
+
+if we ___plot id vs vd___ in **ngspice** we get following graph
+
+&nbsp;
+&nbsp;
+<img width="1157" height="966" alt="image" src="https://github.com/user-attachments/assets/3852790a-6228-4850-bde2-44fc64aafc28" />
+&nbsp;
 
 
 
 ### 10. First Inverter Characteristics Using 7nm FinFETs
-before we start with inverter characteristic we run xschem with nfet characteristic: **xschem nfet_char.sch**
+before we start with inverter characteristic we run xschem with nfet characteristic: <ins>**xschem nfet_char.sch**</ins>
 
- - ##### some useful commands for "**xschem**" handling:
+#### some useful commands for "**xschem**" handling:
 &nbsp;
  | Command|Key-Sequence|
  |:--------|:------------:|
@@ -324,61 +324,183 @@ before we start with inverter characteristic we run xschem with nfet characteris
  |Save| Ctrl-S|
  |Open| Ctrl-O|
  |Quit| Ctrl-Q|
-> 
->  
->  
->
-> &nbsp;
-> 
-> <img width="671" height="136" alt="image" src="https://github.com/user-attachments/assets/c298584b-1317-4b16-a475-73c5cada7466" />
->
-> &nbsp;
->
-> <img width="1192" height="896" alt="image" src="https://github.com/user-attachments/assets/4dfc71e9-96e9-41be-b447-581c777d5244" />
->
-> &nbsp;
-> &nbsp;
 
-- ### 11-Inverter Spice Deck And Characteristics Modelling
+&nbsp;
+
+<img width="671" height="136" alt="image" src="https://github.com/user-attachments/assets/c298584b-1317-4b16-a475-73c5cada7466" />
+
+&nbsp;
+
+<img width="1192" height="896" alt="image" src="https://github.com/user-attachments/assets/4dfc71e9-96e9-41be-b447-581c777d5244" />
+
+&nbsp;
+&nbsp;
+
+### 11. Inverter Spice Deck And Characteristics Modelling
 
 
-- ### 12-W/L Ratio, Vt, Power Consumption. Prop Delay, Gain And Noise Margin
+### 12. W/L Ratio, Vt, Power Consumption. Prop Delay, Gain And Noise Margin
 
 
-- ### 13-Transconductance, Frequency And Inverter Characteristics Table Assignment
+### 13. Transconductance, Frequency And Inverter Characteristics Table Assignment
 
 
-- ### 14-Lab Tips To Calculate Switching Threshold, Drain Current And Power
+### 14. Lab Tips To Calculate Switching Threshold, Drain Current And Power
 
 
-- ### 15-Lab Tips To Calculate Prop Delay, Transconductance and Frequency
+### 15. Lab Tips To Calculate Prop Delay, Transconductance and Frequency
 
 
-- ### 16-Assignment
+### 16. Assignment
 
 
 </details>
 
 ---------------------------------------------------------------------------------------
-### Designing Bandgap References Using 7nm FinFETs
+## Designing Bandgap References Using 7nm FinFETs
 <details>
 <summary>Designing Bandgap References Using 7nm FinFETs</summary>
 
-- #### 17-Introduction To Bandgap
+### 17. Introduction To Bandgap
 
 
-- #### 18-Bandgap Component Placement Using Xschem
+### 18. Bandgap Component Placement Using Xschem
 
 
-- #### 19-Bandgap Circuit Wiring Using Xschem
+### 19. Bandgap Circuit Wiring Using Xschem
 
 
-- #### 20-Bandgap Circuit Final Simulations
+### 20. Bandgap Circuit Final Simulations
 
 
-- #### 21-Assignment
+### 21. Assignment
 
 
+
+</details>
+
+-------------------------------------------------------------------------------------
+### used Tools
+
+<details>
+<summary>xschem</summary>
+	
+&nbsp;
+
+Overview
+&nbsp;
+
+Xschem is primarily an analog/mixed‑signal schematic capture tool with tight SPICE integration. In digital contexts it is most valuable for transistor‑level design, mixed‑signal blocks, timing/power analysis, and custom cell development rather than replacing RTL/logic simulators.
+
+When Xschem makes sense for digital work
+- Transistor‑level design of standard cells, I/O pads, level shifters, sense amplifiers, SRAM bitcells.
+- Analog/mixed‑signal IP inside a digital SoC (PLL, ADC/DAC front‑ends, on‑chip regulators, clock drivers).
+- Timing, power, and signal‑integrity verification at transistor level (rise/fall, short‑circuit current, dynamic power).
+- Rapid schematic editing and parameter sweeps for device sizing and corner analysis before layout.
+
+Typical workflow in a digital environment
+1. Capture transistor‑level schematics for cells or blocks in Xschem using hierarchical sheets and parameterized symbols.
+2. Attach device models (BSIM, custom MOS, passive models) and set corners.
+3. Generate SPICE netlists and run simulations (ngspice, Xyce, or other SPICE engine) to obtain timing, power, and margin data.
+4. Use behavioral models (Verilog‑A/Verilog‑AMS) or mixed‑signal co‑simulation where interaction with RTL or digital testbenches is required — tool support varies by simulator.
+5. Export netlists for layout/LVS and hand off verified transistor netlists to downstream physical design teams.
+
+Integration and toolchain points
+- SPICE engines: ngspice, Xyce, commercial SPICE — choose based on Verilog‑A/AMS and performance needs.
+- Co‑simulation: use Verilog‑AMS / Verilog‑A or a mixed‑signal co‑simulator for interaction with RTL; verify compatibility between your SPICE engine and AMS support.
+- Version control: Xschem’s text‑based symbols and schematics fit well into Git for library and cell management.
+- Layout handoff: Xschem produces SPICE/subcircuit netlists used by layout/LVS flows, but additional script/tooling may be needed to generate cell abstracts, LEF, or integration with place‑and‑route flows.
+
+Strengths for digital teams
+- Precise transistor‑level control and fast iteration on device sizing and corners.
+- Lightweight, scriptable files that support automated regression simulations and CI.
+- Good for mixed‑signal verification where analog effects matter to digital behaviour (IOs, clock drivers, power domains).
+
+Limitations & risks
+- Not a substitute for RTL design/verification (Verilog/VHDL) or digital logic simulators — functional digital verification must remain in HDL toolchains.
+- Mixed‑signal co‑simulation capability depends on SPICE engine (Verilog‑AMS/Verilog‑A support is inconsistent across open tools).
+- Downstream EDA integration (LEF/DEF, place‑and‑route automation) is not native — expect custom conversion scripts and engineering effort.
+- Platform and support: Linux‑centric with limited commercial support; requires in‑house expertise.
+
+Cost/effort considerations
+- Low licensing cost, but expect nontrivial investment for:
+  - Toolchain integration (co‑simulators, conversion scripts)
+  - Library creation and validation (standard cell libraries, models)
+  - Training for transistor‑level workflows and mixed‑signal verification
+
+Recommended pilot (4–8 weeks)
+- Scope: implement and validate a small set of representative items (e.g., 6 standard cells + one I/O pad or clock buffer).
+- Tasks: create Xschem schematics, run corner SPICE sims (timing/power), run at least one mixed‑signal co‑simulation with a simple RTL testbench (if required), export netlists for layout/LVS.
+- Metrics: time to first successful transistor‑level simulation, accuracy of timing/power vs. baseline, effort to integrate netlists into existing flows, and engineer feedback on usability.
+- Acceptance: pilot completes on schedule, simulations meet accuracy thresholds vs. baseline, and integration scripts reduce manual handoffs.
+
+Recommendations
+- Use Xschem for transistor‑level and mixed‑signal blocks where analog effects impact digital function.
+- Continue using RTL/logic toolchain for functional digital verification; adopt co‑simulation only where necessary.
+- Plan for initial integration effort (scripts, simulator selection, training) and run a focused pilot before wider adoption.
+
+</details>
+
+<details>
+<summary>ngspice</summary>
+	
+&nbsp;
+
+Overview
+&nbsp;
+ngspice is a widely used open‑source SPICE-compatible circuit simulator for analog, mixed‑signal and basic digital verification. It provides command‑line and batch operation, interactive waveform plotting, behavioural sources, device model support, and scripting for automated flows. It is commonly used on Linux and can be run on Windows/macOS via ports or compatibility layers.
+
+Strategic value
+- Enables in‑house circuit simulation without license fees, lowering cost of entry and supporting reproducible, version‑controlled analog and mixed‑signal verification flows.
+- Useful for transistor‑level validation (standard cells, I/O circuits), analog IP development, and regression testing in CI pipelines.
+
+Key benefits
+- Cost: no per‑seat licensing costs; suitable for teams needing many simulation instances.
+- Openness & integration: text‑based netlists and outputs integrate well with front‑ends (Xschem, KiCad), automated scripts, and version control.
+- Automation: robust batch and scripting capabilities for regression, parameter sweeps and CI.
+- Feature set: supports standard SPICE elements, behavioural B‑sources, parameterized devices and transient/AC/DC/noise analyses; built‑in plotting and data export (raw files).
+- Community & portability: active user community, frequent updates, runs on common server/CI environments.
+
+Limitations & risks
+- Performance & scalability: for very large circuits or high‑performance requirements, commercial simulators (and specialized tools like Xyce) may be faster or more scalable.
+- Advanced AMS support: support for Verilog‑A/Verilog‑AMS and some advanced device model dialects can be limited or require additional tooling; complex mixed‑signal co‑simulation needs careful validation.
+- PDK compatibility: foundry PDKs and some commercial models may be tuned for specific commercial SPICE variants — validate model compatibility and accuracy before production use.
+- Support model: community and internal expertise drive support; no guaranteed commercial SLA unless paired with third‑party support arrangements.
+- Platform nuances: Windows/macOS use typically requires extra setup (WSL/Cygwin/ports), adding initial effort for non‑Linux teams.
+
+Cost/effort considerations
+- Low direct software cost, but expect investment in:
+  - Validation of models vs. baseline commercial simulators (accuracy tests).
+  - Toolchain integration (front‑end, CI, waveform tools).
+  - Training for engineers on ngspice quirks, scripting, and batch jobs.
+  - Potential development of adapters/automation for PDK or layout handoffs.
+
+Recommended pilot (4–8 weeks)
+- Scope: validate ngspice on representative use cases — e.g., a set of standard cells, an I/O buffer, and one mixed‑signal block.
+- Tasks:
+  1. Install and standardize a stable ngspice version on CI servers.
+  2. Import device models (BSIM/custom models) and run baseline comparisons against a reference simulator on a small set of circuits.
+  3. Create scripted regression tests (transient, AC, DC, noise) and waveform extraction (.measure).
+  4. Integrate with schematic front‑end (Xschem/KiCad) and automate netlist generation.
+  5. Measure runtime, accuracy and stability across corners and temperatures.
+- Metrics:
+  - Simulation accuracy vs. reference (acceptable delta on key metrics).
+  - Throughput: runtime for representative jobs and CI load capacity.
+  - Integration effort (time to automate netlist → run → report).
+  - User feedback on usability and debugging.
+
+Success criteria
+- ngspice reproduces key electrical metrics within agreed tolerances versus baseline tools.
+- Regression tests run automatically and reliably in CI with acceptable runtime.
+- Models and PDK files are compatible or have a documented path to compatibility.
+- Team confidence and a documented support/rollback plan if specific jobs require commercial tools.
+
+Recommendations / next steps
+- Start with a focused pilot as above; include at least one mixed‑signal co‑simulation if your designs need it.
+- Build a model validation suite (unit circuits, corners, temp) to compare against reference results.
+- Automate simulation workflows and store netlists/results in version control and CI.
+- Define escalation: when to use commercial simulators (e.g., failing accuracy or performance thresholds).
+- If needed, evaluate third‑party commercial support or a hybrid flow (ngspice for regression, commercial tools for sign‑off).
 
 </details>
 
