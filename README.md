@@ -336,6 +336,13 @@ before we start with inverter characteristic we run xschem with nfet characteris
 &nbsp;
 &nbsp;
 
+cutoff point for Vtc will be at:
+
+x0 = 0.344791, y0 = 0.344768
+
+<img width="1326" height="957" alt="image" src="https://github.com/user-attachments/assets/c90edcb2-9faf-4652-b99f-5dfb5f67a4d9" />
+
+
 ### 11. Inverter Spice Deck And Characteristics Modelling
 
 
