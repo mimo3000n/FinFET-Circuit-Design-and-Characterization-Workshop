@@ -654,8 +654,37 @@ print nml                                             : Prints the calculated no
 
 #### Transconductance (Gm)
 
-Transconductance (Gm)
-Transconductance is defined as the ratio of change in drain current and change in Vgs (Gate-source Voltage). In our case, we already have drain current and VGS is input voltage which is nfet_in.
+- The transconductance gm of a device is the small‑signal change of the output current per change of the input voltage:
+  gm = dIout / dVin.
+- Unit: siemens (S) = A/V. Common symbol: gm or g_m. Also called transconductance (or mutual conductance).
+
+Meaning
+- gm describes how efficiently a voltage change at the input is converted into a current change at the output. It is a key parameter for the gain behavior and bandwidth of amplifier circuits.
+
+Formulas for typical devices
+- BJT (collector/emitter current Ic, thermal voltage VT ≈ 25.85 mV at 25 °C):
+  gm ≈ Ic / VT.
+  Example: Ic = 1 mA → gm ≈ 0.001 / 0.02585 ≈ 0.0387 S = 38.7 mS.
+- MOSFET (saturation region, overdrive Vov = Vgs − Vth):
+  Approximation: gm ≈ 2·Id / Vov.
+  Alternatively (ideal square‑law): gm = √(2 μ·Cox·(W/L)·Id).
+  Example: Id = 1 mA, Vov = 0.2 V → gm ≈ 2·0.001 / 0.2 = 0.01 S = 10 mS.
+
+Small‑signal models
+- BJT (hybrid‑π): small‑signal current source gm·vπ between collector and emitter; input resistance rπ ≈ β / gm.
+- MOSFET: small‑signal current source gm·vgs between drain and source; gate is effectively a high‑impedance input.
+
+Effect on gain
+- In a simple amplifier with load resistance RL, the voltage gain is approximately A_v ≈ −gm·(RL || r_o) (sign depends on circuit topology).
+- Higher gm → higher open‑loop gain and often larger bandwidth, but also stronger dependence on bias current and temperature.
+
+Practical notes
+- gm depends on the operating point (bias current or Vgs/Vbe) and on temperature.
+- In integrated circuits the specific transconductance k′ = μ·Cox is often used.
+- For more accurate calculations additional effects must be considered (e.g., channel‑length modulation r_o for MOSFETs, nonlinearities).
+
+One‑sentence summary
+- Transconductance = small‑signal current change per input voltage change (gm = dI/dV), a central parameter for a transistor’s ability to amplify.
 
 Spice commands
 
