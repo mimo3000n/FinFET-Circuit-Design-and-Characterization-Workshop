@@ -618,6 +618,31 @@ plot id
 
 &nbsp;
 
+#### Propagation Delay (Tp)
+
+The propagation delay of a logic gate e.g. inverter is the difference in time (calculated at 50% of input-output transition), when output switches, after application of input. Rise time (tr) is the time, during transition, when output switches from 10% to 90% of the maximum value. Fall time (tf) is the time, during transition, when output switches from 90% to 10% of the maximum value. Many designs could also prefer 30% to 70% for rise time and 70% to 30% for fall time. It could vary upto different designs.
+
+Spice Commands
+
+``` spice
+meas tran tpr when nfet_in=0.35 RISE=1 : Measures the rise time (tpr) when the input voltage reaches 0.35V
+meas tran tpf when nfet_out=0.35 FALL=1 : Measures the fall time (tpf) when the output voltage reaches 0.35V. 
+let tp = (tpf + tpr)/2 : Calculates the average propagation delay (tp) as the mean of the rise and fall times.
+print tp : prints the Propagation Delay
+```
+&nbsp;
+
+<ins>ngspice output for propagation delay>/ins>
+
+**tpr = 2.500000e-11**
+
+**tpf = 2.560432e-11**
+
+**tp = 2.530216e-11**
+
+
+&nbsp;
+
 #### Gain (Av)
 
 Gain is defined as Change in output voltage to that of input voltage. Spice Commands to calculate gain
@@ -629,6 +654,12 @@ let gain_av=deriv(nfet_out) : this gives out negative gain
 let gain_av=abs(deriv(nfet_out)) : Gives the absolute value of gain.
 plot gain
 ```
+
+&nbsp;
+
+<ins>ngspice output for max gain:</ins>
+
+**max_gain = 6.428448e+00**
 
 &nbsp;
 
@@ -650,9 +681,21 @@ let nml=vil-vol                                       : Calculates the noise mar
 print nml                                             : Prints the calculated noise margin low.
 ```
 
+<ins>ngspice output for noise margin:</ins>
+
+**vil = 3.488156e-01**
+
+**voh = 3.190767e-01**
+
+**vih = 3.510961e-01**
+
+**vol = 3.044187e-01**
+
+**nmh = -3.20194e-02**
+
 &nbsp;
 
-#### Transconductance (Gm)
+#### - Transconductance (Gm)
 
 - The transconductance gm of a device is the small‑signal change of the output current per change of the input voltage:
   gm = dIout / dVin.
@@ -696,9 +739,74 @@ plot gm
 
 &nbsp;
 
+<ins>ngspice output for max transcudacdance:</ins>
+
+**gm_max              =  1.235805e-03 at=  4.250000e-01**
+
+&nbsp;
+
 <img width="973" height="756" alt="image" src="https://github.com/user-attachments/assets/667a4093-2903-49c1-878d-eb8feba976be" />
 
 &nbsp;
+
+#### - Frequency (f)
+
+In this case, the maximum signal frequency was calculated, using delay time. As disscussed above about rise time (tr) and fall time (tf). So the frequency would be 1/(tr+tf) Spice commands used for this :
+
+``` spice
+tran 0.1 100p                          : Performs a transient analysis with a time step of 0.1ns and a total simulation time of 100ps.
+meas tran tr when nfet_in=0.07 RISE=1  : Measures the rise time (tr) when the input voltage reaches 0.07V.
+meas tran tf when nfet_out=0.63 FALL=1 : Measures the fall time (tf) when the output voltage reaches 0.63V.
+let t_delay = tr + tf                  : Calculates the total delay time as the sum of rise and fall times.
+print t_delay                          : Prints the total delay time.
+let f = 1/t_delay                      : Calculates the frequency (f) as the reciprocal of the total delay time.
+print f                                : Prints the frequency.
+
+```
+
+&nbsp;
+
+<ins>ngspice output for frequency:</ins>
+
+**tr                  =  2.100000e-11**
+
+**tf                  =  2.351715e-11**
+
+**t_delay = 4.451715e-11**
+
+**f = 2.246325e+10**
+
+&nbsp;
+
+#### - Output Resistance
+
+The output resistance is defined as the ratio of output node voltage and the change in drain current. So here we are taking derivative of output voltage and derivative of the drain current. Spice commands:
+
+``` spice
+let r_out= deriv(nfet_out,id)   : Calculates the output resistance by taking the derivative of the output voltage with respect to the branch current.
+plot r_out                      : Plots the output resistance.
+```
+
+&nbsp;
+
+<img width="1460" height="853" alt="image" src="https://github.com/user-attachments/assets/05785c84-7161-4bc6-8cf9-790af66eaa1d" />
+
+&nbsp;
+
+#### - Schematic of inverter
+
+&nbsp;
+
+<ins>**run "xschem inverter_vtc.sch"**</ins>
+
+&nbsp;
+
+<img width="1144" height="817" alt="image" src="https://github.com/user-attachments/assets/24725245-3227-403e-8a37-055b9e01eee8" />
+
+&nbsp;
+
+
+
 
 
 ### 11. Inverter Spice Deck And Characteristics Modelling
