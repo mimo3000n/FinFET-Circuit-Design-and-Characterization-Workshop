@@ -658,6 +658,7 @@ plot gain
 &nbsp;
 
 <ins>ngspice output for max gain:</ins>
+&nbsp;
 
 **max_gain = 6.428448e+00**
 
