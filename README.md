@@ -1206,6 +1206,12 @@ findings: if we increase nmos fins and keep pmos fins constant at 14: Vth go don
 
 findings: if fins of pmos & nmos increase Id & P increase, other characteristics keep constant!
 
+&nbsp;
+
+<img width="1639" height="742" alt="image" src="https://github.com/user-attachments/assets/5a7ee928-8574-4e08-bf72-a1dc8cc18621" />
+
+&nbsp;
+
 </details>
 
 ---------------------------------------------------------------------------------------
