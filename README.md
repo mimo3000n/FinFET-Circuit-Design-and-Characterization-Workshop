@@ -828,6 +828,370 @@ plot r_out                      : Plots the output resistance.
 ### 16. Assignment
 
 
+ASCII-Sum for "Gerhard" :
+
+G = 71
+e = 101
+r = 114
+h = 104
+a = 97
+r = 114
+d = 100
+
+Sum = 71 + 101 + 114 + 104 + 97 + 114 + 100 = 701
+
+so we use 701mV in spice file.
+
+reference W/L 14/7 for pmos & nmos
+
+using 701mV. based on my name i get following values and plot using 14/7 (W/L Ration = 2) for pmos & nmos
+
+using blow spice file:
+
+``` spice
+
+
+** sch_path: /home/vsduser/Desktop/asap_7nm_Xschem/inverter_vtc.sch
+**.subckt inverter_vtc
+Xpfet1 nfet_out nfet_in vdd vdd asap_7nm_pfet l=7e-009 nfin=14
+Xnfet1 nfet_out nfet_in GND GND asap_7nm_nfet l=7e-009 nfin=14
+V1 nfet_in GND pulse(0 0.701 20p 10p 10p 20p 500p 1)
+V2 vdd GND 0.701
+**** begin user architecture code
+
+
+.dc v1 0 0.701 1m
+*.tran 1e-12 100e-12
+
+.control
+    * First run DC
+   dc v1 0 0.701 1m
+    run
+
+    * DC measurements
+    meas dc v_th when nfet_out = nfet_in
+    plot nfet_out nfet_in
+    
+    let gain_av = abs(deriv(nfet_out))
+    meas dc max_gain max gain_av
+    let gain_target = max_gain * 0.999
+    meas dc vil find nfet_in when gain_av = gain_target cross=1
+    meas dc voh find nfet_out when gain_av = gain_target cross=1
+    meas dc vih find nfet_in when gain_av = gain_target cross=2
+    meas dc vol find nfet_out when gain_av = gain_target cross=2
+    let nmh = voh - vih
+    let nml = vil - vol
+    print v_th max_gain vil voh vih vol nmh nml
+    
+    *Transconductance
+    
+    let id = v2#branch
+    let gm = real(deriv(id, nfet_in))
+    meas dc gm_max MAX gm
+    plot gm
+    let r_out= deriv(nfet_out,id)
+    plot r_out
+    plot id
+    
+    * Transient measurements
+    tran 1e-12 100e-12
+    meas tran tpr when nfet_in = 0.35 rise = 1
+    meas tran tpf when nfet_out = 0.35 fall = 1
+    let tp = (tpr + tpf) / 2
+    let trans_current = v2#branch
+    meas tran id_pwr integ trans_current from=2e-11 to=6e-11
+    let pwr = id_pwr * 0.7
+    let power = abs(pwr / 40e-12)
+    print tpr tpf tp id_pwr pwr power
+  
+    tran 0.1 100p                         
+    meas tran tr when nfet_in=0.07 RISE=1  
+    meas tran tf when nfet_out=0.63 FALL=1 
+    let t_delay = tr + tf                  
+    print t_delay                         
+    let f = 1/t_delay                     
+    print f                              
+
+    
+
+.endc
+
+
+
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+**** begin user architecture code
+
+.subckt asap_7nm_pfet S G D B l=7e-009 nfin=14
+	npmos_finfet S G D B BSIMCMG_osdi_P l=7e-009 nfin=14
+.ends asap_7nm_pfet
+
+.model BSIMCMG_osdi_P BSIMCMG_va (
++ TYPE = 0
+
+************************************************************
+*                         general                          *
+************************************************************
++version = 107             bulkmod = 1               igcmod  = 1               igbmod  = 0
++gidlmod = 1               iimod   = 0               geomod  = 1               rdsmod  = 0
++rgatemod= 0               rgeomod = 0               shmod   = 0               nqsmod  = 0
++coremod = 0               cgeomod = 0               capmod  = 0               tnom    = 25
++eot     = 1e-009          eotbox  = 1.4e-007        eotacc  = 3e-010          tfin    = 6.5e-009
++toxp    = 2.1e-009        nbody   = 1e+022          phig    = 4.9278          epsrox  = 3.9
++epsrsub = 11.9            easub   = 4.05            ni0sub  = 1.1e+016        bg0sub  = 1.17
++nc0sub  = 2.86e+025       nsd     = 2e+026          ngate   = 0               nseg    = 5
++l       = 2.1e-008        xl      = 1e-009          lint    = -2.5e-009       dlc     = 0
++dlbin   = 0               hfin    = 3.2e-008        deltaw  = 0               deltawcv= 0
++sdterm  = 0               epsrsp  = 3.9             nfin    = 1
++toxg    = 1.8e-009
+************************************************************
+*                            dc                            *
+************************************************************
++cit     = 0               cdsc    = 0.003469        cdscd   = 0.001486        dvt0    = 0.05
++dvt1    = 0.36            phin    = 0.05            eta0    = 0.094           dsub    = 0.24
++k1rsce  = 0               lpe0    = 0               dvtshift= 0               qmfactor= 0
++etaqm   = 0.54            qm0     = 2.183e-012      pqm     = 0.66            u0      = 0.0237
++etamob  = 4               up      = 0               ua      = 1.133           eu      = 0.05
++ud      = 0.0105          ucs     = 0.2672          rdswmin = 0               rdsw    = 200
++wr      = 1               rswmin  = 0               rdwmin  = 0               rshs    = 0
++rshd    = 0               vsat    = 60000           deltavsat= 0.17            ksativ  = 1.592
++mexp    = 2.491           ptwg    = 25              pclm    = 0.01            pclmg   = 1
++pdibl1  = 800             pdibl2  = 0.005704        drout   = 4.97            pvag    = 200
++fpitch  = 2.7e-008        rth0    = 0.15            cth0    = 1.243e-006      wth0    = 2.6e-007
++lcdscd  = 0               lcdscdr = 0               lrdsw   = 1.3             lvsat   = 1441
+************************************************************
+*                         leakage                          *
+************************************************************
++aigc    = 0.007           bigc    = 0.0015          cigc    = 1               dlcigs  = 5e-009
++dlcigd  = 5e-009          aigs    = 0.006           aigd    = 0.006           bigs    = 0.001944
++bigd    = 0.001944        cigs    = 1               cigd    = 1               poxedge = 1.152
++agidl   = 2e-012          agisl   = 2e-012          bgidl   = 1.5e+008        bgisl   = 1.5e+008
++egidl   = 1.142           egisl   = 1.142
+************************************************************
+*                            rf                            *
+************************************************************
+************************************************************
+*                         junction                         *
+************************************************************
+************************************************************
+*                       capacitance                        *
+************************************************************
++cfs     = 0               cfd     = 0               cgso    = 1.6e-010        cgdo    = 1.6e-010
++cgsl    = 0               cgdl    = 0               ckappas = 0.6             ckappad = 0.6
++cgbo    = 0               cgbl    = 0
+************************************************************
+*                       temperature                        *
+************************************************************
++tbgasub = 0.000473        tbgbsub = 636             kt1     = 0               kt1l    = 0
++ute     = -1.2            utl     = 0               ua1     = 0.001032        ud1     = 0
++ucste   = -0.004775       at      = 0.001           ptwgt   = 0.004           tmexp   = 0
++prt     = 0               tgidl   = -0.007          igt     = 2.5
+************************************************************
+*                          noise                           *
+************************************************************
+**)
+.control
+pre_osdi /home/vsduser/Desktop/asap_7nm_Xschem/bsimcmg.osdi
+.endc
+
+
+
+.subckt asap_7nm_nfet S G D B l=7e-009 nfin=14
+	nnmos_finfet S G D B BSIMCMG_osdi_N l=7e-009 nfin=14
+.ends asap_7nm_nfet
+
+.model BSIMCMG_osdi_N BSIMCMG_va (
++ TYPE = 1
+************************************************************
+*                         general                          *
+************************************************************
++version = 107             bulkmod = 1               igcmod  = 1               igbmod  = 0
++gidlmod = 1               iimod   = 0               geomod  = 1               rdsmod  = 0
++rgatemod= 0               rgeomod = 0               shmod   = 0               nqsmod  = 0
++coremod = 0               cgeomod = 0               capmod  = 0               tnom    = 25
++eot     = 1e-009          eotbox  = 1.4e-007        eotacc  = 1e-010          tfin    = 6.5e-009
++toxp    = 2.1e-009        nbody   = 1e+022          phig    = 4.2466          epsrox  = 3.9
++epsrsub = 11.9            easub   = 4.05            ni0sub  = 1.1e+016        bg0sub  = 1.17
++nc0sub  = 2.86e+025       nsd     = 2e+026          ngate   = 0               nseg    = 5
++l       = 2.1e-008        xl      = 1e-009          lint    = -2e-009         dlc     = 0
++dlbin   = 0               hfin    = 3.2e-008        deltaw  = 0               deltawcv= 0
++sdterm  = 0               epsrsp  = 3.9             nfin    = 1
++toxg    = 1.80e-009
+************************************************************
+*                            dc                            *
+************************************************************
++cit     = 0               cdsc    = 0.01            cdscd   = 0.01            dvt0    = 0.05
++dvt1    = 0.47            phin    = 0.05            eta0    = 0.07            dsub    = 0.35
++k1rsce  = 0               lpe0    = 0               dvtshift= 0               qmfactor= 2.5
++etaqm   = 0.54            qm0     = 0.001           pqm     = 0.66            u0      = 0.0303
++etamob  = 2               up      = 0               ua      = 0.55            eu      = 1.2
++ud      = 0               ucs     = 1               rdswmin = 0               rdsw    = 200
++wr      = 1               rswmin  = 0               rdwmin  = 0               rshs    = 0
++rshd    = 0               vsat    = 70000           deltavsat= 0.2             ksativ  = 2
++mexp    = 4               ptwg    = 30              pclm    = 0.05            pclmg   = 0
++pdibl1  = 0               pdibl2  = 0.002           drout   = 1               pvag    = 0
++fpitch  = 2.7e-008        rth0    = 0.225           cth0    = 1.243e-006      wth0    = 2.6e-007
++lcdscd  = 5e-005          lcdscdr = 5e-005          lrdsw   = 0.2             lvsat   = 0
+************************************************************
+*                         leakage                          *
+************************************************************
++aigc    = 0.014           bigc    = 0.005           cigc    = 0.25            dlcigs  = 1e-009
++dlcigd  = 1e-009          aigs    = 0.0115          aigd    = 0.0115          bigs    = 0.00332
++bigd    = 0.00332         cigs    = 0.35            cigd    = 0.35            poxedge = 1.1
++agidl   = 1e-012          agisl   = 1e-012          bgidl   = 10000000        bgisl   = 10000000
++egidl   = 0.35            egisl   = 0.35
+************************************************************
+*                            rf                            *
+************************************************************
+************************************************************
+*                         junction                         *
+************************************************************
+************************************************************
+*                       capacitance                        *
+************************************************************
++cfs     = 0               cfd     = 0               cgso    = 1.6e-010        cgdo    = 1.6e-010
++cgsl    = 0               cgdl    = 0               ckappas = 0.6             ckappad = 0.6
++cgbo    = 0               cgbl    = 0
+************************************************************
+*                       temperature                        *
+************************************************************
++tbgasub = 0.000473        tbgbsub = 636             kt1     = 0               kt1l    = 0
++ute     = -0.7            utl     = 0               ua1     = 0.001032        ud1     = 0
++ucste   = -0.004775       at      = 0.001           ptwgt   = 0.004           tmexp   = 0
++prt     = 0               tgidl   = -0.007          igt     = 2.5
+************************************************************
+*                          noise                           *
+************************************************************
+**)
+.control
+pre_osdi /home/vsduser/Desktop/asap_7nm_Xschem/bsimcmg.osdi
+.endc
+
+
+**** end user architecture code
+.end
+
+```
+
+<img width="1697" height="1016" alt="image" src="https://github.com/user-attachments/assets/17a79674-d97b-4a8a-9f83-64d005d25750" />
+
+
+``` ngspice output
+
+v_th = 3.453099e-01
+max_gain = 6.419967e+00
+vil = 3.492708e-01
+voh = 3.200718e-01
+vih = 3.516842e-01
+vol = 3.045787e-01
+nmh = -3.16124e-02
+nml = 4.469210e-02
+gm_max              =  1.237678e-03 at=  4.260000e-01
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+nfet_out                              0.700646
+nfet_in                                      0
+vdd                                      0.701
+v2#branch                         -8.09446e-07
+v1#branch                          7.22565e-12
+
+ Reference value :  4.75000e-11
+No. of Data Rows : 120
+tpr                 =  2.499287e-11
+tpf                 =  2.560584e-11
+id_pwr              =  -1.70088e-15 from=  2.00000e-11 to=  6.00000e-11
+tpr = 2.499287e-11
+tpf = 2.560584e-11
+tp = 2.529935e-11
+id_pwr = -1.70088e-15
+pwr = -1.19062e-15
+power = 2.976538e-05
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+nfet_out                              0.700646
+nfet_in                                      0
+vdd                                      0.701
+v2#branch                         -8.09446e-07
+v1#branch                          7.22565e-12
+
+
+No. of Data Rows : 71
+tr                  =  2.099857e-11
+tf                  =  2.352563e-11
+t_delay = 4.452420e-11
+f = 2.245970e+10
+
+
+```
+
+
+
+##### Characteristics Table 
+
+increasing fins of pmos, constant fins for nmos of 14
+
+| Sr. No | W (Width) pmos | L (Length) pmos | (W/L Ratio) pmos | W (Width) nmos | L (Length) nmos | (W/L Ratio) nmos | Switching Threshold Voltage (VTC) -mV | Drain Current (Id) (μA) | Power Consumption (P) | Propagation Delay (t_pd) (ps) | Gain (Av) | Noise Margin (NM) | Transconductance (gm) X10^-3 | Frequency (f) (GHz) | Output Resistance (Ro) |
+|--------|-----------------|------------------|------------------|----------------|------------------|------------------|-------------------------------------|--------------------------|-----------------------|------------------------------|-----------|-------------------|----------------------------|---------------------|------------------------|
+| 1      | 10              | 7 nm             | 1.43             | 14             | 7 nm             | 2                | 321.54                              | 191.1                    | 2.674 × 10^-17        | 0.2511                      | 6.418     | NMH=0.2355V, NML=0.1346V | 9.695                      | 22.592              | 6.4122                 |
+| 2      | 12              | 7 nm             | 1.57             | 14             | 7 nm             | 2.14             | 323.35                              | 208.112                  | 2.908 × 10^-17        | 0.2513                      | 6.4734    | NMH=0.2334V, NML=0.1361V | 1.059                      | 22.584              | 6.4736                 |
+| 3      | 14              | 7 nm             | 2.29             | 14             | 7 nm             | 2.14             | 349.25                              | 249.45                   | 3.525 × 10^-17        | 0.2538                      | 6.4268    | NMH=0.1870V, NML=0.1761V | 1.384                      | 22.429              | 6.4265                 |
+| 4      | 16              | 7 nm             | 2.43             | 14             | 7 nm             | 2.14             | 353.43                              | 256.272                  | 3.622 × 10^-17        | 0.25409                     | 6.4292    | NMH=0.1811V, NML=0.185V | 1.441                      | 22.393              | 6.4292                 |
+| 5      | 18              | 7 nm             | 2.43             | 14             | 7 nm             | 2.29             | 348.98                              | 265.612                  | 3.754 × 10^-17        | 0.2537                      | 6.427     | NMH=0.1877V, NML=0.1761V | 1.472                      | 22.431              | 6.4271                 |
+| 6      | 20              | 7 nm             | 2.43             | 14             | 7 nm             | 2.43             | 344.78                              | 274.515                  | 3.877 × 10^-17        | 0.2347                      | 6.4285    | NMH=0.1958V, NML=0.1685V | 1.5                        | 22.463              | 6.4284                 |
+
+
+
+increasing fins of nmos, constant fins of pmos of 14
+
+| Sr. No | W (Width) pmos | L (Length) pmos | (W/L Ratio) pmos | W (Width) nmos | L (Length) nmos | (W/L Ratio) nmos | Switching Threshold Voltage (VTC) -mV | Drain Current (Id) (μA) | Power Consumption (P) | Propagation Delay (t_pd) (ps) | Gain (Av) | Noise Margin (NM) | Transconductance (gm) X10^-3 | Frequency (f) (GHz) | Output Resistance (Ro) |
+|--------|-----------------|------------------|------------------|----------------|------------------|------------------|-------------------------------------|--------------------------|-----------------------|------------------------------|-----------|-------------------|----------------------------|---------------------|------------------------|
+| 7      | 14              | 7 nm             | 2.29             | 10             | 7 nm             | 2.43             | 340.58                              | 266.85                   | 3.763 × 10^-17        | 0.2531                      | 6.43115   | NMH=0.2029V, NML=0.1619V | 1.438                      | 22.492              | 6.4311                 |
+| 8      | 14              | 7 nm             | 2.43             | 12             | 7 nm             | 2                | 351.19                              | 246.447                  | 3.4822 × 10^-17       | 0.2543                      | 6.4339    | NMH=0.1730V, NML=0.1960V | 1.408                      | 22.349              | 6.4339                 |
+| 9      | 14              | 7 nm             | 2.29             | 14             | 7 nm             | 2                | 354.01                              | 240.063                  | 3.39 × 10^-17         | 0.2541                      | 6.42865   | NMH=0.17988V, NML=0.18383V | 1.3533                    | 22.388              | 6.42865                |
+| 10     | 14              | 7 nm             | 2.29             | 16             | 7 nm             | 2.14             | 349.25                              | 249.4516                 | 3.53 × 10^-17         | 0.2538                      | 6.42678   | NMH=0.1870V, NML=0.1768V | 1.384                      | 22.429              | 6.42678                |
+| 11     | 14              | 7 nm             | 2.29             | 18             | 7 nm             | 2.29             | 354.01                              | 240.064                  | 3.39 × 10^-17         | 0.2541                      | 6.42865   | NMH=0.1798V, NML=0.1838V | 1.3533                    | 22.388              | 6.42865                |
+| 12     | 14              | 7 nm             | 2.14             | 20             | 7 nm             | 2                | 349.5                               | 241.65                   | 3.29 × 10^-17         | 0.2538                      | 6.4272    | NMH=0.1874V, NML=0.1764V | 1.295                      | 22.426              | 6.4275                 |
+
+
+
+increasing fins for pmos, incrasing fins for nmos
+
+| Sr. No | W (Width) pmos | L (Length) pmos | (W/L Ratio) pmos | W (Width) nmos | L (Length) nmos | (W/L Ratio) nmos | Switching Threshold Voltage (VTC) -mV | Drain Current (Id) (μA) | Power Consumption (P) | Propagation Delay (t_pd) (ps) | Gain (Av) | Noise Margin (NM) | Transconductance (gm) X10^-3 | Frequency (f) (GHz) | Output Resistance (Ro) |
+|--------|-----------------|------------------|------------------|----------------|------------------|------------------|-------------------------------------|--------------------------|-----------------------|------------------------------|-----------|-------------------|----------------------------|---------------------|------------------------|
+| 13     | 10              | 7 nm             | 2.14             | 10             | 7 nm             | 2.14             | 344.78                              | 242.21                   | 3.42 × 10^-17         | 0.2534                      | 6.4283    | NMH=0.1958V, NML=0.16851V | 1.32                       | 22.463              | 6.4285                 |
+| 14     | 12              | 7 nm             | 2                | 12             | 7 nm             | 2.14             | 340.41                              | 234.53                   | 3.307 × 10^-17        | 0.25307                     | 6.4628    | NMH=0.2033V, NML=0.1617V | 1.26                       | 22.496              | 6.4326                 |
+| 15     | 14              | 7 nm             | 1.86             | 14             | 7 nm             | 2                | 339.65                              | 218.36                   | 3.07 × 10^-17         | 0.25304                     | 6.4323    | NMH=0.2038V, NML=0.1611V | 1.173                      | 22.498              | 6.4324                 |
+| 16     | 16              | 7 nm             | 2                | 16             | 7 nm             | 1.86             | 349.913                             | 217.122                  | 3.06 × 10^-17         | 0.2538                      | 6.4279    | NMH=0.186V, NML=0.176V  | 1.207                      | 22.423              | 6.4279                 |
+| 17     | 18              | 7 nm             | 2.14             | 18             | 7 nm             | 1.86             | 354.52                              | 223.85                   | 3.16 × 10^-17         | 0.2541                      | 6.4299    | NMH=0.178V, NML=0.185V  | 1.26                       | 22.382              | 6.4299                 |
+| 18     | 20              | 7 nm             | 2.14             | 20             | 7 nm             | 1.71             | 341.52                              | 216.62                   | 3.04 × 10^-17         | 0.2537                      | 6.4273    | NMH=0.1854V, NML=0.1766V | 1.208                      | 22.406              | 6.4273                 |
+
+
+
+| 19     | 14              | 7 nm             | 2                | 12             | 7 nm             | 1.71             | 339.1                               | 203.1                    | 2.95 × 10^-17         | 0.2542                      | 6.4326    | NMH=0.174V, NML=0.1771V  | 1.097                      | 22.492              | 6.4324                 |
+| 20     | 12              | 7 nm             | 1.71             | 12             | 7 nm             | 1.71             | 340.62                              | 200.85                   | 2.92 × 10^-17         | 0.2542                      | 6.4298    | NMH=0.1724V, NML=0.178V  | 1.095                      | 22.496              | 6.4313                 |
+| 21     | 13              | 7 nm             | 1.86             | 12             | 7 nm             | 1.71             | 342.21                              | 196.31                   | 2.89 × 10^-17         | 0.2541                      | 6.4268    | NMH=0.1714V, NML=0.179V  | 1.098                      | 22.512              | 6.4267                 |
+| 22     | 12              | 7 nm             | 1.71             | 12             | 7 nm             | 1.71             | 339.22                              | 195.92                   | 2.86 × 10^-17         | 0.2542                      | 6.4299    | NMH=0.169V, NML=0.1793V  | 1.093                      | 22.498              | 6.4268                 |
+
+
+
+
+
 </details>
 
 ---------------------------------------------------------------------------------------
