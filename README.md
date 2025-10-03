@@ -72,6 +72,7 @@ Graduates leave with a coherent portfolio: annotated netlists, verified waveform
 <img width="1448" height="808" alt="image" src="https://github.com/user-attachments/assets/b32d6203-0d72-4673-886b-ff7caa96a59e" />
 
 
+
 &nbsp;
 ### 4. Standard Cell Area Scaling And Variability
 &nbsp;
